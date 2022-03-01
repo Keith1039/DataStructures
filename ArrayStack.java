@@ -21,10 +21,14 @@ public class ArrayStack implements Stack {
     }
 
     public Object pop(){
+        if(top < 0){
+            return(null);
+        }
         Object returnable=stack[top];
         stack[top]=null;
         top--;
         return(returnable);
+        
     }
 
     public void push(Object other){
