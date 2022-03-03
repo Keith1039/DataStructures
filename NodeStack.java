@@ -41,13 +41,14 @@ public class NodeStack implements Stack {
         return(returnable.getValue());
     }
     public Node newTop(){
-        Node CurrentNode;
+        Node CurrentNode,right_before;
         CurrentNode=nodelist[0];
+        right_before=CurrentNode;
         while(CurrentNode.getNext()!=null){
+            right_before=CurrentNode;
             CurrentNode=CurrentNode.getNext();
         }
-
-        return(CurrentNode);
+        return(right_before);
     }
     
 
