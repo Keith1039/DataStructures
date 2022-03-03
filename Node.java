@@ -17,4 +17,5 @@ public class Node {
         this.Next=other;
     }
     
+    
 }

@@ -36,6 +36,7 @@ public class NodeStack implements Stack {
         }else{
             returnable=top;
             top=newTop();
+            top.setNext(null);
         }
         return(returnable.getValue());
     }
