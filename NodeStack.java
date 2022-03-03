@@ -34,14 +34,22 @@ public class NodeStack implements Stack {
         if(IsEmpty()==true){
             return(null);
         }else{
+            if(top==first){
+                returnable=first;
+                nodelist[0]=null;
+                top=null;
+            }
+            else{
             returnable=top;
             top=newTop();
             top.setNext(null);
+            }
         }
         return(returnable.getValue());
     }
     public Node newTop(){
-        Node CurrentNode,right_before;
+        Node CurrentNode;
+        Node right_before;
         CurrentNode=nodelist[0];
         right_before=CurrentNode;
         while(CurrentNode.getNext()!=null){
