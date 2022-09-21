@@ -4,6 +4,17 @@ public class Improved_Linked_List<E> {
     */
     private Node<E> head=null;
     private Node<E> tail=null;
+    public static void main(String[] args){
+        Improved_Linked_List<Integer> list = new Improved_Linked_List<Integer>();
+        list.push(1);
+        list.push(23);
+        list.push(3);
+        Node<Integer> temp = list.head;
+        while(temp != null){
+            System.out.println(temp.isType());
+            temp = temp.getNext();
+        }
+    }
     public static interface Node<E>{
         /*interface Node because the "next" and "prev" Node can be 1 of 2 types. Simply saves me the headache */
         public void setNext(Node<E> node);
@@ -32,7 +43,7 @@ public class Improved_Linked_List<E> {
             this.next = next;
         }
         public void setNext(Node<E> node){
-            this.next = next;
+            this.next = node;
         }
         public void setPrev(Node<E> node){
 
@@ -70,7 +81,7 @@ public class Improved_Linked_List<E> {
         }
 
         public void setNext(Node<E> node){
-            this.next = next;
+            this.next = node;
         }
         public void setPrev(Node<E> node){
             this.prev = node;
@@ -105,7 +116,6 @@ public class Improved_Linked_List<E> {
             Node1 prev = tail.getPrevious();
              */
             tail.setNext(new Node2<E>(value,tail,null));
-
             tail.getNext().setPrev(tail);
             if(head != tail){ //Condition ensures that only a Node2 type triggers this
                 //replaces the old tail with the same tail of Node1 type
