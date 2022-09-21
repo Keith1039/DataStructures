@@ -1,5 +1,5 @@
 
-public class Binary_Tree_attempt<Integer> {
+public class Binary_Tree_attempt<Integer>{
     public static class Node<Integer>{
         private int value;
         private Node<Integer> Greater_than;
@@ -43,9 +43,12 @@ public class Binary_Tree_attempt<Integer> {
                 }
             }
         }
+        
     }
 
     public void get(){
-        
+
     }
+
+    
 }
