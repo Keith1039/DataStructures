@@ -1,9 +1,9 @@
 
-public class Binary_Tree_attempt<Integer>{
-    public static class Node<Integer>{
+public class Binary_Tree_attempt<E>{ 
+    public static class Node<E>{
         private int value;
-        private Node<Integer> Greater_than;
-        private Node<Integer> Less_Than;
+        private Node<E> Greater_than;
+        private Node<E> Less_Than;
 
         
         public Node(int val){
@@ -11,20 +11,20 @@ public class Binary_Tree_attempt<Integer>{
         }
 
     } 
-    Node<Integer> root;
+    Node<E> root;
     
     public Binary_Tree_attempt(int val){
-        root=new Node<Integer>(val);
+        root=new Node<E>(val);
     }
 
     public void push(int value){ //put a clause here about how duplicates are a nono
-        Node<Integer> new_node= new Node<Integer>(value);
+        Node<E> new_node= new Node<E>(value);
         Boolean flag=false; //is the new node added yet?
         if(this.root==null){
             this.root=new_node;
         }
         else{
-            Node<Integer> current_node=root;
+            Node<E> current_node=root;
             while(flag==false){
                 if(current_node.value< value &&current_node.Greater_than==null){
                     current_node.Greater_than=new_node;
