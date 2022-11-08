@@ -1,8 +1,12 @@
 
+import java.util.Random;
 public class BubbleSort {
 
     public static void main(String[] args){
-        int[] array = new int[]{1,7,2,6,0};
+        Random random = new Random();
+        
+        
+        int[] array = new int[]{random.nextInt(100),random.nextInt(100),random.nextInt(100),random.nextInt(100),random.nextInt(100)};
         BSort(array);
         for(int i=0;i<array.length;i++){
             System.out.println(array[i]);
