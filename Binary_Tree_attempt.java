@@ -46,9 +46,16 @@ public class Binary_Tree_attempt<E>{
         
     }
 
-    public void get(){
+    public void get(){ //
 
     }
+
+    public int Sumation(){
+        int returnable =0;
+
+        return(returnable);
+    }
+
 
     
 }
