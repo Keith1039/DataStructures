@@ -3,12 +3,10 @@ public class Heap_Attempt {
     //This heap is a min-heap since that is probably going to be more useful for when I use heap sort
     public static void main(String[] args){
         Heap_Attempt Heap = new Heap_Attempt();
-        for(int i=0; i< 20; i++){
+        for(int i=0; i< 9; i++){
             Heap.push(i);
         }
         System.out.println(Heap.next_external.val);
-
-
     }
     public static class Node{
         private int val;
@@ -31,7 +29,6 @@ public class Heap_Attempt {
     private Node head;
     private Node next_external;
     private int size =0;
-    private int maxDepth =0;
     
     public Heap_Attempt(){
         this.head = null;
@@ -47,10 +44,10 @@ public class Heap_Attempt {
             next_external = node;
             head.depth =0;
         }
+
         else{
             node.parent = next_external;
             node.depth=node.parent.depth+1;
-            maxDepth=node.depth;
             if(next_external.left == null){
                 next_external.left = node;
             }
@@ -74,17 +71,21 @@ public class Heap_Attempt {
                 next_external = findNextExternal(next_external.pos,next_external.depth,head);
             }
         }
+
         
     }
 
-    public void heapify(Node node){
+    public boolean heapify(Node node){
         //upheap meant to be active only after data is pushed by the push function.
         if(node.parent.val > node.val){
             //swaps values 
             int val = node.parent.val;
             node.parent.val = node.val;
             node.val = val;
+            return(true);
         }
+
+        return(false);
     }
     public static Node findNextExternal(int pos,int depth, Node node){
         //Finds the next external node to populate recursively
@@ -97,12 +98,57 @@ public class Heap_Attempt {
         }
         else if(node.depth < depth){
             return(findNextExternal(pos, depth, node.left));
-        }
+        }                                                      
 
         else{
             return(null);
         }
 
+    }
+        public static Node findPastExternal(int pos,int depth, Node node){
+        //Finds the next external node to populate recursively
+        if(node.pos == pos-1){
+            return(node);
+        }
+        else if(node.left != null && findPastExternal(pos,depth, node.left) == null){
+            //if the next external node is not on the right side, backtrack once and go right
+            return(findPastExternal(pos,depth, node.right));
+        }
+        else if(node.depth < depth){
+            return(findPastExternal(pos, depth, node.left));
+        }                                                      
+
+        else{
+            return(null);
+        }
+
+    }
+    public int removeMin(){
+        int returnable = head.val;
+        if(next_external.left == null){
+            next_external = findPastExternal(next_external.pos, next_external.depth, head);
+        }
+        Node node;
+        if(next_external.right != null){
+            node = next_external.right;
+            next_external.right = null;
+            node.parent = null;
+        }
+        else{
+            node = next_external.left;
+            next_external.left = null;
+            node.parent = null;
+        }
+        head.val = node.val;
+        heapify(head);
+
+        return(returnable);
+    }
+    public void downHeap(Node head){
+        boolean flag = false;
+        while(flag == false){
+            flag =heapify(head);
+        }
     }
 
 
