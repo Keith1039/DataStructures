@@ -6,7 +6,10 @@ public class Heap_Attempt {
         for(int i=0; i< 9; i++){
             Heap.push(i);
         }
-        System.out.println(Heap.next_external.val);
+        while(!Heap.isEmpty()){
+            System.out.println(Heap.removeMin());
+        }
+        //System.out.println(Heap.next_external.val);
     }
     public static class Node{
         private int val;
@@ -77,9 +80,25 @@ public class Heap_Attempt {
 
     public boolean heapify(Node node){
         //upheap meant to be active only after data is pushed by the push function.
-        if(node.parent.val > node.val){
+        int val;
+        if(node.parent == null){
+            if(node.left.val > node.val){
+                val = node.left.val;
+                node.left.val = node.val;
+                node.val = val;
+                return(true);
+            }
+            else if(node.right.val > node.val){
+                val = node.right.val;
+                node.right.val = node.val;
+                node.val = val;
+                return(true);
+            }
+
+        }
+        else if(node.parent.val > node.val){
             //swaps values 
-            int val = node.parent.val;
+            val = node.parent.val;
             node.parent.val = node.val;
             node.val = val;
             return(true);
@@ -149,6 +168,9 @@ public class Heap_Attempt {
         while(flag == false){
             flag =heapify(head);
         }
+    }
+    public Boolean isEmpty(){
+        return(head == null);
     }
 
 
