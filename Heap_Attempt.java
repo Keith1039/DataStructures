@@ -1,6 +1,15 @@
 
 public class Heap_Attempt {
     //This heap is a min-heap since that is probably going to be more useful for when I use heap sort
+    public static void main(String[] args){
+        Heap_Attempt Heap = new Heap_Attempt();
+        for(int i=0; i< 8; i++){
+            Heap.push(i);
+        }
+        System.out.println(Heap.next_external.val);
+
+
+    }
     public static class Node{
         private int val;
         private Node parent;
@@ -28,7 +37,9 @@ public class Heap_Attempt {
         this.head = null;
     }
 
-    public void push(Node node){
+    public void push(int num){
+        Node node = new Node();
+        node.val = num;
         size++;
         node.pos = size;
         if(head == null){
@@ -37,9 +48,9 @@ public class Heap_Attempt {
             head.depth =0;
         }
         else{
+            node.parent = next_external;
             node.depth=node.parent.depth+1;
             maxDepth=node.depth;
-            node.parent = next_external;
             if(next_external.left == null){
                 next_external.left = node;
             }
@@ -48,17 +59,18 @@ public class Heap_Attempt {
             }
         }
         if(next_external.isFull()){
+            System.out.println("Triggered");
             //finds the left most external node after the current one is full
             if(next_external.isMostRight()){
                 //goes down to the left most node of the same depth;
-                int z = next_external.depth;
+                int z = next_external.depth+1;
                 next_external = head;
                 for(int i =0;i<z;i++){
                     next_external=next_external.left;
                 }
             }
             else{
-                //next_external = findNextExternal();
+                next_external = findNextExternal(next_external.pos,head);
             }
         }
         
@@ -73,13 +85,19 @@ public class Heap_Attempt {
             node.val = val;
         }
     }
-    public static Node findNextExternal(int pos){
+    public static Node findNextExternal(int pos, Node node){
         //Finds the next external node to populate recursively
-        
+        if(node.pos == pos+1){
+            return(node);
+        }
+        else if(node.left != null && findNextExternal(pos, node.left) == null){
+            //if the next external node is not on the right side, backtrack once and go right
+            return(findNextExternal(pos, node.right));
+        }
+        else{
+            return(null);
+        }
 
-
-
-        return(null);
     }
 
 
