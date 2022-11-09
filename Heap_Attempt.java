@@ -3,7 +3,7 @@ public class Heap_Attempt {
     //This heap is a min-heap since that is probably going to be more useful for when I use heap sort
     public static void main(String[] args){
         Heap_Attempt Heap = new Heap_Attempt();
-        for(int i=0; i< 9; i++){
+        for(int i=0; i< 20; i++){
             Heap.push(i);
         }
         System.out.println(Heap.next_external.val);
@@ -70,7 +70,7 @@ public class Heap_Attempt {
                 }
             }
             else{
-                System.out.println("Triggered");
+                //System.out.println("Triggered");
                 next_external = findNextExternal(next_external.pos,next_external.depth,head);
             }
         }
