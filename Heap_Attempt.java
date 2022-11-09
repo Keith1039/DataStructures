@@ -22,6 +22,7 @@ public class Heap_Attempt {
     private Node head;
     private Node next_external;
     private int size =0;
+    private int maxDepth =0;
     
     public Heap_Attempt(){
         this.head = null;
@@ -37,12 +38,27 @@ public class Heap_Attempt {
         }
         else{
             node.depth=node.parent.depth+1;
+            maxDepth=node.depth;
             node.parent = next_external;
             if(next_external.left == null){
                 next_external.left = node;
             }
             else{
                 next_external.right = node;
+            }
+        }
+        if(next_external.isFull()){
+            //finds the left most external node after the current one is full
+            if(next_external.isMostRight()){
+                //goes down to the left most node of the same depth;
+                int z = next_external.depth;
+                next_external = head;
+                for(int i =0;i<z;i++){
+                    next_external=next_external.left;
+                }
+            }
+            else{
+                //next_external = findNextExternal();
             }
         }
         
@@ -57,9 +73,16 @@ public class Heap_Attempt {
             node.val = val;
         }
     }
-    public void findNextExternal(){
-        //Finds the next external node to populate.
+    public static Node findNextExternal(int pos){
+        //Finds the next external node to populate recursively
+        
+
+
+
+        return(null);
     }
+
+
 
     
 }
