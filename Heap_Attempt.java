@@ -3,7 +3,7 @@ public class Heap_Attempt {
     //This heap is a min-heap since that is probably going to be more useful for when I use heap sort
     public static void main(String[] args){
         Heap_Attempt Heap = new Heap_Attempt();
-        for(int i=0; i< 8; i++){
+        for(int i=0; i< 9; i++){
             Heap.push(i);
         }
         System.out.println(Heap.next_external.val);
@@ -59,7 +59,7 @@ public class Heap_Attempt {
             }
         }
         if(next_external.isFull()){
-            System.out.println("Triggered");
+            //System.out.println("Triggered");
             //finds the left most external node after the current one is full
             if(next_external.isMostRight()){
                 //goes down to the left most node of the same depth;
@@ -70,7 +70,8 @@ public class Heap_Attempt {
                 }
             }
             else{
-                next_external = findNextExternal(next_external.pos,head);
+                System.out.println("Triggered");
+                next_external = findNextExternal(next_external.pos,next_external.depth,head);
             }
         }
         
@@ -85,15 +86,19 @@ public class Heap_Attempt {
             node.val = val;
         }
     }
-    public static Node findNextExternal(int pos, Node node){
+    public static Node findNextExternal(int pos,int depth, Node node){
         //Finds the next external node to populate recursively
         if(node.pos == pos+1){
             return(node);
         }
-        else if(node.left != null && findNextExternal(pos, node.left) == null){
+        else if(node.left != null && findNextExternal(pos,depth, node.left) == null){
             //if the next external node is not on the right side, backtrack once and go right
-            return(findNextExternal(pos, node.right));
+            return(findNextExternal(pos,depth, node.right));
         }
+        else if(node.depth < depth){
+            return(findNextExternal(pos, depth, node.left));
+        }
+
         else{
             return(null);
         }
